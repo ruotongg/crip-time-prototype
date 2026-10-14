@@ -1,0 +1,202 @@
+/* Prototype 1 — Crip Time Clock */
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: #222;
+}
+
+.back-link {
+  display: inline-block;
+  padding: 1rem;
+  color: inherit;
+}
+
+main {
+  padding: 0 2rem 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-bottom: 0.25rem;
+}
+
+.intro {
+  color: #555;
+  max-width: 50ch;
+}
+
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+}
+
+/* --- Clock --- */
+
+.clock-panel {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.clock-wrap {
+  width: 100%;
+  max-width: 320px;
+}
+
+#clock-face {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.face {
+  fill: #fff;
+  stroke: #2a2a2a;
+  stroke-width: 2;
+}
+
+.numeral {
+  font-size: 22px;
+  fill: #222;
+  text-anchor: middle;
+  dominant-baseline: central;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.hand {
+  stroke: #222;
+  stroke-linecap: round;
+}
+
+.hour-hand {
+  stroke-width: 6;
+}
+
+.minute-hand {
+  stroke-width: 4;
+}
+
+.second-hand {
+  stroke-width: 1.5;
+  stroke: #b23b3b;
+}
+
+.hub {
+  fill: #222;
+}
+
+.clock-panel label {
+  font-weight: 600;
+}
+
+.clock-panel select {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.sound-toggle {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #444;
+  cursor: pointer;
+}
+
+.sound-toggle[aria-pressed="true"] {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+
+/* --- Reflection panel --- */
+
+.reflection-panel {
+  flex: 1 1 320px;
+}
+
+.reflection-panel h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+#reflection-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#reflection-text {
+  width: 100%;
+  padding: 0.75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+#reflection-form button {
+  align-self: flex-start;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #222;
+  color: #fff;
+  cursor: pointer;
+}
+
+#reflection-form button:hover {
+  background: #444;
+}
+
+.reflection-log {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+
+.reflection-log li {
+  border-bottom: 1px solid #eee;
+  padding: 0.75rem 0;
+}
+
+.reflection-log .entry-meta {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.reflection-log .entry-feeling {
+  font-weight: 600;
+  color: #222;
+}
+
+.reflection-log .entry-text {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.reflection-log:empty::before {
+  content: "No reflections saved yet.";
+  color: #888;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype 2 — The Shredder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="back-link" href="../index.html">&larr; Back to gallery</a>
+
+  <main>
+    <h1>The Shredder</h1>
+    <p class="intro">Click the calendar once to feed it into the shredder. It will not come back.</p>
+
+    <div class="layout">
+      <section class="shredder-panel">
+        <div class="stage" id="stage">
+          <div class="calendar" id="calendar" tabindex="0" role="button" aria-label="Shred this week's calendar">
+            <div class="cal-header">
+              <div class="cal-corner"></div>
+              <div class="cal-day">Mon</div>
+              <div class="cal-day">Tue</div>
+              <div class="cal-day">Wed</div>
+              <div class="cal-day">Thu</div>
+              <div class="cal-day">Fri</div>
+            </div>
+            <div class="cal-body">
+              <div class="cal-times">
+                <div>9</div><div>10</div><div>11</div><div>12</div><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div>
+              </div>
+              <div class="cal-grid">
+                <div class="cal-col">
+                  <div class="cal-event" style="top:0px; height:34px;">Standup</div>
+                  <div class="cal-event" style="top:144px; height:34px;">Deadline: report</div>
+                </div>
+                <div class="cal-col">
+                  <div class="cal-event" style="top:36px; height:34px;">1:1 w/ manager</div>
+                  <div class="cal-event" style="top:216px; height:34px;">Client call</div>
+                </div>
+                <div class="cal-col">
+                  <div class="cal-event" style="top:0px; height:34px;">Standup</div>
+                  <div class="cal-event" style="top:180px; height:34px;">Team sync</div>
+                  <div class="cal-event rest" style="top:252px; height:70px;">Rest (moved again)</div>
+                </div>
+                <div class="cal-col">
+                  <div class="cal-event" style="top:72px; height:34px;">Review</div>
+                  <div class="cal-event" style="top:144px; height:34px;">Focus block</div>
+                </div>
+                <div class="cal-col">
+                  <div class="cal-event" style="top:0px; height:34px;">Standup</div>
+                  <div class="cal-event" style="top:180px; height:70px;">All-hands</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shredder">
+            <div class="shredder-slot"></div>
+            <div class="shredder-body"></div>
+          </div>
+
+          <div class="bin"></div>
+
+          <div class="strip-layer" id="strip-layer" aria-hidden="true"></div>
+        </div>
+
+        <button type="button" id="cleanup-btn" class="cleanup-btn" hidden>Clean up</button>
+      </section>
+
+      <section class="statement-panel">
+        <h2>Critical design statement</h2>
+        <p>The calendar performs neutrality &mdash; a grid, an administrative fact. But grids encode assumptions: that bodies run on schedule, that rest can be rescheduled without cost. Shredding this week is a small, irreversible refusal &mdash; made in the spirit of <a href="https://cassandrahradil.com/about/" target="_blank" rel="noopener">Cassandra Hradil's</a> critical making. It doesn't destroy time. It refuses this version of it.</p>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

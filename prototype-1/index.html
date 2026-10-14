@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype 1 — Crip Time Clock</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="back-link" href="../index.html">&larr; Back to gallery</a>
+
+  <main>
+    <h1>Crip Time Clock</h1>
+    <p class="intro">The hands keep mechanical time. The numbers don't — they shift with how your body feels right now.</p>
+
+    <div class="layout">
+      <section class="clock-panel">
+        <div class="clock-wrap">
+          <svg id="clock-face" viewBox="0 0 300 300" role="img" aria-label="Analog clock whose numerals are shaped by the selected bodily feeling">
+            <circle class="face" cx="150" cy="150" r="140"></circle>
+            <g id="numerals"></g>
+            <line id="hour-hand" class="hand hour-hand" x1="150" y1="150" x2="150" y2="92"></line>
+            <line id="minute-hand" class="hand minute-hand" x1="150" y1="150" x2="150" y2="64"></line>
+            <line id="second-hand" class="hand second-hand" x1="150" y1="150" x2="150" y2="50"></line>
+            <circle class="hub" cx="150" cy="150" r="5"></circle>
+          </svg>
+        </div>
+
+        <label for="feeling-select">How does your body feel right now?</label>
+        <select id="feeling-select"></select>
+
+        <button type="button" id="sound-toggle" class="sound-toggle" aria-pressed="false">🔈 Tick sound: off</button>
+      </section>
+
+      <section class="reflection-panel">
+        <h2>Record this moment</h2>
+        <form id="reflection-form">
+          <textarea id="reflection-text" rows="4" placeholder="What's happening in your body or mind right now?"></textarea>
+          <button type="submit">Save reflection</button>
+        </form>
+        <ol id="reflection-log" class="reflection-log"></ol>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype 3 — Card Decks</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="back-link" href="../index.html">&larr; Back to gallery</a>
+
+  <main>
+    <h1>Card Decks</h1>
+    <p class="intro">Three decks, laid face up for now. Drawing, shuffling, and flipping come later.</p>
+
+    <section class="deck" id="deck-productivity">
+      <h2>Time &amp; Productivity Tools</h2>
+      <p class="deck-note">Five familiar methods for managing time.</p>
+      <div class="card-grid" id="productivity-cards"></div>
+    </section>
+
+    <section class="deck" id="deck-oblique">
+      <h2>Oblique Strategies</h2>
+      <p class="deck-note">The complete deck by <a href="https://en.wikipedia.org/wiki/Oblique_Strategies" target="_blank" rel="noopener">Brian Eno &amp; Peter Schmidt</a>, first published 1975 &mdash; via the <a href="https://github.com/joelparkerhenderson/oblique-strategies" target="_blank" rel="noopener">joelparkerhenderson/oblique-strategies</a> list.</p>
+      <div class="card-grid oblique-grid" id="oblique-cards"></div>
+    </section>
+
+    <section class="deck" id="deck-joker">
+      <h2>Joker</h2>
+      <p class="deck-note">Two wild cards.</p>
+      <div class="card-grid joker-grid" id="joker-cards"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
