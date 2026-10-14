@@ -1,11 +1,11 @@
-// Card Decks — static display only. Drawing/shuffling/flipping interaction comes later.
+// Redesign Productivity Tools — shuffle & draw a tool, pull 3 strategies, jokers stay open as reminders.
 
-const PRODUCTIVITY_CARDS = [
-  { title: "Pomodoro Technique", desc: "25 minutes of focused work, then a 5-minute break." },
-  { title: "Eisenhower Matrix", desc: "Sort tasks by urgent vs. important." },
-  { title: "Time Blocking", desc: "Assign every hour of the day a single task." },
-  { title: "Getting Things Done", desc: "Capture everything, then organize by next action." },
-  { title: "Eat the Frog", desc: "Do the hardest, most important task first." },
+const TOOL_CARDS = [
+  { category: "Focus Technique", title: "Pomodoro Technique", desc: "25 minutes of focused work, then a 5-minute break." },
+  { category: "Focus Technique", title: "Time Blocking", desc: "Assign every hour of the day a single task." },
+  { category: "Lists & Calendars", title: "To-Do List", desc: "Write down every task, then cross it off." },
+  { category: "Lists & Calendars", title: "Calendar", desc: "Put each commitment on a fixed date and time." },
+  { category: "AI Copilot", title: "AI Copilot", desc: "An assistant that plans your day and suggests what's next." },
 ];
 
 // The complete Oblique Strategies deck by Brian Eno & Peter Schmidt (1975),
@@ -132,41 +132,123 @@ const JOKER_CARDS = [
   "No tech is neutral. Not all tech shall exist.",
 ];
 
-function renderProductivityCards() {
-  const grid = document.getElementById("productivity-cards");
-  PRODUCTIVITY_CARDS.forEach((c) => {
-    const card = document.createElement("div");
-    card.className = "card card-productivity";
+// --- 1. Tool deck: shuffle, draw one card back-up, click to flip ---
 
-    const title = document.createElement("span");
-    title.className = "card-title";
-    title.textContent = c.title;
+const toolPile = document.getElementById("tool-pile");
+const toolDrawSlot = document.getElementById("tool-draw-slot");
 
-    const desc = document.createElement("span");
-    desc.className = "card-desc";
-    desc.textContent = c.desc;
+function drawToolCard() {
+  const card = TOOL_CARDS[Math.floor(Math.random() * TOOL_CARDS.length)];
 
-    card.appendChild(title);
-    card.appendChild(desc);
-    grid.appendChild(card);
+  const flip = document.createElement("div");
+  flip.className = "flip-card";
+  flip.tabIndex = 0;
+  flip.setAttribute("role", "button");
+  flip.setAttribute("aria-label", "Drawn tool card. Click to flip and reveal it.");
+
+  const inner = document.createElement("div");
+  inner.className = "flip-card-inner";
+
+  const back = document.createElement("div");
+  back.className = "flip-face back";
+  const backHint = document.createElement("span");
+  backHint.className = "flip-hint";
+  backHint.textContent = "Click to reveal";
+  back.appendChild(backHint);
+
+  const front = document.createElement("div");
+  front.className = "flip-face front";
+  const cat = document.createElement("span");
+  cat.className = "card-category";
+  cat.textContent = card.category;
+  const title = document.createElement("span");
+  title.className = "card-title";
+  title.textContent = card.title;
+  const desc = document.createElement("span");
+  desc.className = "card-desc";
+  desc.textContent = card.desc;
+  front.appendChild(cat);
+  front.appendChild(title);
+  front.appendChild(desc);
+
+  inner.appendChild(back);
+  inner.appendChild(front);
+  flip.appendChild(inner);
+
+  const toggleFlip = () => flip.classList.toggle("flipped");
+  flip.addEventListener("click", toggleFlip);
+  flip.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleFlip();
+    }
   });
+
+  toolDrawSlot.innerHTML = "";
+  toolDrawSlot.appendChild(flip);
 }
 
-function renderObliqueCards() {
-  const grid = document.getElementById("oblique-cards");
-  OBLIQUE_CARDS.forEach((text) => {
+function shuffleAndDrawTool() {
+  toolPile.classList.add("shuffling");
+  setTimeout(() => {
+    toolPile.classList.remove("shuffling");
+    drawToolCard();
+  }, 350);
+}
+
+toolPile.addEventListener("click", shuffleAndDrawTool);
+toolPile.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    shuffleAndDrawTool();
+  }
+});
+
+// --- 2. Oblique Strategies deck: draw 3 random cards face-up ---
+
+const obliquePile = document.getElementById("oblique-pile");
+const obliqueDrawRow = document.getElementById("oblique-draw-row");
+
+function drawObliqueCards() {
+  const indices = new Set();
+  while (indices.size < 3) {
+    indices.add(Math.floor(Math.random() * OBLIQUE_CARDS.length));
+  }
+
+  obliqueDrawRow.innerHTML = "";
+  Array.from(indices).forEach((idx, i) => {
+    const text = OBLIQUE_CARDS[idx];
     const card = document.createElement("div");
     card.className = text === null ? "card card-oblique blank" : "card card-oblique";
+    card.style.animationDelay = `${i * 0.08}s`;
+    if (text === null) card.setAttribute("aria-label", "Blank card");
 
     const span = document.createElement("span");
     span.className = "card-text";
     span.textContent = text === null ? "" : text;
-    if (text === null) card.setAttribute("aria-label", "Blank card");
 
     card.appendChild(span);
-    grid.appendChild(card);
+    obliqueDrawRow.appendChild(card);
   });
 }
+
+function shuffleAndDrawOblique() {
+  obliquePile.classList.add("shuffling");
+  setTimeout(() => {
+    obliquePile.classList.remove("shuffling");
+    drawObliqueCards();
+  }, 350);
+}
+
+obliquePile.addEventListener("click", shuffleAndDrawOblique);
+obliquePile.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    shuffleAndDrawOblique();
+  }
+});
+
+// --- 3. Joker cards: always open, on the side ---
 
 function renderJokerCards() {
   const grid = document.getElementById("joker-cards");
@@ -183,6 +265,4 @@ function renderJokerCards() {
   });
 }
 
-renderProductivityCards();
-renderObliqueCards();
 renderJokerCards();

@@ -3,33 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prototype 3 — Card Decks</title>
+  <title>Redesign Productivity Tools</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a class="back-link" href="../index.html">&larr; Back to gallery</a>
 
   <main>
-    <h1>Card Decks</h1>
-    <p class="intro">Three decks, laid face up for now. Drawing, shuffling, and flipping come later.</p>
+    <h1>Redesign Productivity Tools</h1>
+    <p class="intro">Draw a tool to redesign, pull strategies for inspiration, and keep the jokers close as reminders.</p>
 
-    <section class="deck" id="deck-productivity">
-      <h2>Time &amp; Productivity Tools</h2>
-      <p class="deck-note">Five familiar methods for managing time.</p>
-      <div class="card-grid" id="productivity-cards"></div>
-    </section>
+    <div class="layout">
+      <div class="main-column">
 
-    <section class="deck" id="deck-oblique">
-      <h2>Oblique Strategies</h2>
-      <p class="deck-note">The complete deck by <a href="https://en.wikipedia.org/wiki/Oblique_Strategies" target="_blank" rel="noopener">Brian Eno &amp; Peter Schmidt</a>, first published 1975 &mdash; via the <a href="https://github.com/joelparkerhenderson/oblique-strategies" target="_blank" rel="noopener">joelparkerhenderson/oblique-strategies</a> list.</p>
-      <div class="card-grid oblique-grid" id="oblique-cards"></div>
-    </section>
+        <section class="deck-area" id="tool-deck-area">
+          <h2>1. Shuffle &amp; pick a tool</h2>
+          <p class="deck-note">Click the deck to shuffle and draw one card, back on top. Click the drawn card to flip it and see what you're redesigning.</p>
+          <div class="deck-row">
+            <div class="poker-pile pile-tool" id="tool-pile" role="button" tabindex="0" aria-label="Shuffle and draw a productivity tool card">
+              <span class="pile-emblem">T</span>
+            </div>
+            <div class="draw-slot" id="tool-draw-slot">
+              <p class="draw-placeholder">No card drawn yet.</p>
+            </div>
+          </div>
+        </section>
 
-    <section class="deck" id="deck-joker">
-      <h2>Joker</h2>
-      <p class="deck-note">Two wild cards.</p>
-      <div class="card-grid joker-grid" id="joker-cards"></div>
-    </section>
+        <section class="deck-area" id="oblique-deck-area">
+          <h2>2. Draw 3 strategies</h2>
+          <p class="deck-note">Click the deck to draw three oblique strategies at random, as inspiration.</p>
+          <div class="deck-row">
+            <div class="poker-pile pile-oblique" id="oblique-pile" role="button" tabindex="0" aria-label="Draw three oblique strategies">
+              <span class="pile-emblem">OS</span>
+            </div>
+            <div class="draw-row" id="oblique-draw-row">
+              <p class="draw-placeholder">No cards drawn yet.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <aside class="joker-sidebar">
+        <h2>3. Jokers</h2>
+        <p class="deck-note">Keep in mind.</p>
+        <div class="joker-cards" id="joker-cards"></div>
+      </aside>
+    </div>
   </main>
 
   <script src="script.js"></script>
